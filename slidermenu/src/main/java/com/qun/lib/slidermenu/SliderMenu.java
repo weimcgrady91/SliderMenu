@@ -59,9 +59,17 @@ public class SliderMenu extends ViewGroup {
 
     private int mLastX;
     private int mLastY;
+    private boolean isCanSlider = true;
+
+    public void setCanSlider(boolean canSlider) {
+        isCanSlider = canSlider;
+    }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if(!isCanSlider) {
+            return false;
+        }
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mLastX = (int) ev.getX();
@@ -80,6 +88,9 @@ public class SliderMenu extends ViewGroup {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(!isCanSlider) {
+            return false;
+        }
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mLastX = (int) event.getX();

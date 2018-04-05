@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         });
         ListView listView = findViewById(R.id.lv);
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getData()));
+        mSliderMenu.setCanSlider(true);
     }
 
     public List<String> getData() {
