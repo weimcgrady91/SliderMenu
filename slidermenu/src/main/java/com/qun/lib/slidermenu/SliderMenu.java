@@ -67,7 +67,7 @@ public class SliderMenu extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if(!isCanSlider) {
+        if (!isCanSlider) {
             return false;
         }
         switch (ev.getAction()) {
@@ -76,8 +76,17 @@ public class SliderMenu extends ViewGroup {
                 break;
             case MotionEvent.ACTION_MOVE:
                 int curX = (int) ev.getX();
+                int rowX = (int) ev.getRawX();
                 if (Math.abs(curX - mLastX) > 20) {
-                    return true;
+                    if (mState == SliderMenuState.CLOSE) {
+                        if (rowX < 300) {
+                            return true;
+                        }
+                    } else {
+                        if (rowX > 500) {
+                            return true;
+                        }
+                    }
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -88,7 +97,7 @@ public class SliderMenu extends ViewGroup {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(!isCanSlider) {
+        if (!isCanSlider) {
             return false;
         }
         switch (event.getAction()) {
